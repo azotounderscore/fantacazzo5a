@@ -214,7 +214,7 @@ body {
   background: #fff;
   display: flex;
   border-top: 1px solid var(--line);
-  padding: 6px 8px calc(8px + env(safe-area-inset-bottom));
+  padding: 6px 8px calc(58px + env(safe-area-inset-bottom));
   box-shadow: 0 -4px 20px rgba(20,26,38,.08);
 }
 .nav-btn {
