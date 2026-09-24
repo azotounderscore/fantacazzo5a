@@ -130,29 +130,38 @@ body {
 .player-pts span { font-size: 10px; font-weight: 600; color: var(--muted); }
 
 /* ---------- SQUADRA: dettaglio punti per giornata ---------- */
-.day-list { display: flex; flex-direction: column; gap: 10px; }
+.day-list { display: flex; flex-direction: column; gap: 14px; }
 
 .day-group { display: flex; flex-direction: column; }
 
 .day-group-label {
-  font-size: 11px;
+  text-align: center;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text);
+  padding-bottom: 5px;
   border-bottom: 1.5px solid var(--line);
-  padding-bottom: 4px;
-  margin-bottom: 4px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 8px;
 }
+
+.day-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.day-col { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.day-col-empty { min-height: 1px; }
 
 .day-action {
   display: flex; justify-content: space-between; align-items: center;
-  gap: 6px;
-  padding: 2px 0;
+  gap: 4px;
+  padding: 1px 0;
   font-size: 11px;
+  font-weight: 700;
 }
 .day-action-name {
-  color: var(--muted);
-  font-weight: 600;
   font-size: 10.5px;
   text-transform: uppercase;
   letter-spacing: .2px;
@@ -161,17 +170,15 @@ body {
 }
 .day-action-pts {
   font-weight: 800;
-  color: var(--green-dark);
   font-size: 12px;
   flex: none;
 }
-.day-action-pts.neg { color: var(--danger); }
 
-.empty {
-  background: var(--card); border-radius: var(--radius);
-  padding: 30px 16px; text-align: center; font-weight: 600;
-  box-shadow: 0 2px 10px rgba(20,26,38,.06); line-height: 1.6;
-}
+/* Colori in base al segno */
+.day-action.pos .day-action-name,
+.day-action.pos .day-action-pts { color: var(--green-dark); }
+.day-action.neg .day-action-name,
+.day-action.neg .day-action-pts { color: var(--danger); }
 
 /* ---------- PROFILO ---------- */
 .profile-card { text-align: center; padding: 22px 14px; }
