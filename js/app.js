@@ -130,8 +130,8 @@ function viewSquadra() {
     roster = `<div class="empty">La tua rosa è vuota 🏐<br>
       <span class="muted small" style="font-weight:400">L'admin ti assegnerà i tuoi 3 giocatori dopo l'asta.</span></div>`;
   } else {
-    roster = `<div class="roster">${members.map(p => {
-      const days = eventsDetailByMatch(p.id);
+    // 1) Riga delle card giocatore (avatar + nome + totale)
+    const cardsRow = `<div class="roster">${members.map(p => {
       const pts = playerPoints(p.id);
       return `
       <div class="player-col">
@@ -140,22 +140,47 @@ function viewSquadra() {
           <div class="player-name">${esc(p.name)}</div>
           <div class="player-pts ${pts < 0 ? 'neg' : ''}">${signed(pts)} <span>pt</span></div>
         </div>
-        <div class="day-list">
-          ${days.map(d => `
-            <div class="day-group">
-              <div class="day-group-label">${esc(d.label)}</div>
-              ${d.events.map(e => {
-                const lbl = SCORING[e.action] ? SCORING[e.action].label : e.action;
-                const v = num(e.points);
-                return `<div class="day-action">
-                  <span class="day-action-name">${esc(lbl)}</span>
-                  <span class="day-action-pts ${v < 0 ? 'neg' : ''}">${signed(v)}</span>
-                </div>`;
-              }).join('')}
-            </div>`).join('') || '<div class="muted small" style="font-size:11px">Nessun punto</div>'}
-        </div>
       </div>`;
     }).join('')}</div>`;
+
+    // 2) Tutte le giornate in cui almeno un membro ha punti (ordine decrescente)
+    const allLabels = new Set();
+    members.forEach(p => {
+      EVENTS.filter(e => sameId(e.player_id, p.id))
+        .forEach(e => allLabels.add(e.match_label || 'Partita'));
+    });
+    const labels = [...allLabels].sort((a, b) => {
+      const na = parseInt((a.match(/\d+/) || [0])[0], 10);
+      const nb = parseInt((b.match(/\d+/) || [0])[0], 10);
+      if (na && nb && na !== nb) return nb - na;
+      return b.localeCompare(a, 'it');
+    });
+
+    // 3) Per ogni giornata: intestazione + 3 colonne con le azioni di ciascun giocatore
+    const daysHTML = labels.map(label => {
+      const cols = members.map(p => {
+        const evs = EVENTS
+          .filter(e => sameId(e.player_id, p.id) && (e.match_label || 'Partita') === label)
+          .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+        if (!evs.length) return `<div class="day-col day-col-empty"></div>`;
+        return `<div class="day-col">${evs.map(e => {
+          const lbl = SCORING[e.action] ? SCORING[e.action].label : e.action;
+          const v = num(e.points);
+          const cls = v < 0 ? 'neg' : 'pos';
+          return `<div class="day-action ${cls}">
+            <span class="day-action-name">${esc(lbl)}</span>
+            <span class="day-action-pts">${signed(v)}</span>
+          </div>`;
+        }).join('')}</div>`;
+      }).join('');
+      return `
+        <div class="day-group">
+          <div class="day-group-label">${esc(label)}</div>
+          <div class="day-cols">${cols}</div>
+        </div>`;
+    }).join('') || '<div class="muted small" style="font-size:11px">Nessun punto registrato.</div>';
+
+    roster = cardsRow + `<div class="day-list">${daysHTML}</div>`;
   }
   const total = teamPoints(ME.id);
   return `
