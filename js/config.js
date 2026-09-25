@@ -12,7 +12,7 @@ const CONFIG = {
   SUPABASE_URL: 'https://lldlwgvuxvyerpemetdd.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxsZGx3Z3Z1eHZ5ZXJwZW1ldGRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNDY0MjYsImV4cCI6MjEwNTgyMjQyNn0.ivttUT9807jzRSmHveK8LbhB9FYD-hVvkFOapt4tXm4',
 
-  APP_NAME: 'FantaCazzo',
+  APP_NAME: 'FantaPelliccia',
 };
 
 /* ============================================================
