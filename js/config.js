@@ -25,14 +25,15 @@ const CONFIG = {
    a identificare l'azione nel database.
    ============================================================ */
 const SCORING = {
-  punto:           { label: 'Punto vinto',        pts: 1  },
-  schiacciata:     { label: 'Schiacciata',        pts: 2  },
-  muro:            { label: 'Muro',               pts: 2  },
-  ace:             { label: 'Servizio ace',       pts: 2  },
-  palleggio:       { label: 'Palleggio (assist)', pts: 1  },
-  ricezione:       { label: 'Ricezione perfetta', pts: 1  },
-  difesa:          { label: 'Difesa',             pts: 1  },
-  fallo:           { label: 'Fallo',              pts: -1 },
-  errore_servizio: { label: 'Errore al servizio', pts: -1 },
-  errore_attacco:  { label: 'Errore in attacco',  pts: -1 },
+  punto:           { label: 'Punto',              pts: 2  },
+  schiacciata:     { label: 'Schiacciata',        pts: 3  },
+  muro:            { label: 'Muro',               pts: 3  },
+  ace:             { label: 'Ace',                pts: 1  },
+  palleggio:       { label: 'Assist',             pts: 1  },
+  ricezione:       { label: 'Salvataggio',        pts: 2  },
+  difesa:          { label: 'Buona Ricezione',    pts: 1  },
+  fallo:           { label: 'Infrazione',         pts: -2 },
+  errore_servizio: { label: 'Battuta sbagliata',  pts: -1 },
+  errore_attacco:  { label: 'Invasione',          pts: -2 },
+  schiacciata_rete: { label: 'Schiacciata a rete', pts: -1.5},
 };
