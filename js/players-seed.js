@@ -21,5 +21,10 @@ const PLAYERS_SEED = [
   { name: 'Iaio',     photo: 'images/players/iaio.jpg' },
   { name: 'Musso',    photo: 'images/players/musso.jpg' },
   { name: 'Ale',    photo: 'images/players/ale.jpg' },
+  { name: 'Pascucci',    photo: 'images/players/pascucci.jpg' },
+  { name: 'Perri',    photo: 'images/players/perri.jpg' },
+  { name: 'Cardone',    photo: 'images/players/cardo.jpg' },
+  { name: 'Marcello',    photo: 'images/players/marcello.jpg' },
+  { name: 'Zozit',    photo: 'images/players/zozit.jpg' },
   // ... aggiungi qui gli altri
 ];
